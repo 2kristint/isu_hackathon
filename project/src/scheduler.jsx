@@ -112,31 +112,6 @@ const Scheduler = () => {
             ) : (
                 <p>Loading calendar...</p>
             )}
-            <div>
-                <h1>Data Passed</h1>
-                {appointments.length > 0 ? (
-                    <p>Appointments passed: {JSON.stringify(appointments)}</p>
-                ) : (
-                    <p>No appointments were passed from the form.</p>
-                )}
-                {tasks.length > 0 ? (
-                    <p>Tasks passed: {JSON.stringify(tasks)}</p>
-                ) : (
-                    <p>No tasks were passed from the form.</p>
-                )}
-                {userAnswer1 ? (
-                    <p>Wakeup: {JSON.stringify(userAnswer1)}</p>
-                ) : (
-                    <p>No wakeup time was passed from the form.</p>
-                )}
-                {userAnswer2 ? (
-                    <p>Sleep: {JSON.stringify(userAnswer2)}</p>
-                ) : (
-                    <p>No sleep time were passed from the form.</p>
-                )}
-                <h2>Sorted Appointments:</h2>
-                <pre>{JSON.stringify(schedule, null, 2)}</pre>
-            </div>
         </>
     );
 };
