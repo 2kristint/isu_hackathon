@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 import FormsTogether from './formsTogether'
+import Scheduler from './scheduler'
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <FormsTogether />
+      <Scheduler />
     </>
   )
 }
