@@ -83,7 +83,7 @@ const formsTogether = () => {
                 </div>
             ))}
             </div>
-            <button type="button" onClick={addAppointment}>
+            <button type="button" onClick={addAppointment} className="forms-addappointment-button">
                 Add Appointment
             </button>
             <div className = "tasks-border">
@@ -111,10 +111,10 @@ const formsTogether = () => {
                 
             ))}
             </div>
-            <button type="button" onClick={addTask}>
+            <button type="button" onClick={addTask} className = "task-button">
                 Add Task
             </button>
-            <button type="submit" style={{ marginLeft: "0.5rem" }}>
+            <button type="submit" style={{ marginLeft: "0.5rem" }} className = "forms-submitButton">
                 Submit All
             </button>
             </div>
