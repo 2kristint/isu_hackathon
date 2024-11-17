@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./quizPage.css";
 
 const QuizPage = () => {
 
@@ -26,13 +27,13 @@ const QuizPage = () => {
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", textAlign: "center", marginTop: "50px" }}>
-      <h1>Little self quiz</h1>
-      <p>Let's get to know your sleep schedule!</p>
+    <div className = "quiz-container" style={{ fontFamily: "Arial, sans-serif", textAlign: "center", marginTop: "50px" }}>
+      <h1 className = "quiz-title">Little self quiz</h1>
+      <p>Let's get to know your sleep schedule! 🌿🌙</p>
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <h3>Q.1 When do you usually to go to sleep?</h3>
-          <input
+          <h3 className = "quiz-question">Q.1 When do you usually to go to sleep?</h3>
+          <input className = "quiz-input"
             type="text"
             placeholder="Type your answer"
             value={userAnswer1}
@@ -47,8 +48,8 @@ const QuizPage = () => {
               borderRadius: "4px",
             }}
           />
-          <h3>Q.2 When do you usually wake up?</h3>
-          <input
+          <h3 className = "quiz-question">Q.2 When do you usually wake up?</h3>
+          <input className = "quiz-input"
             type="When do you usually wake up?"
             placeholder="Type your answer"
             value={userAnswer2}
@@ -66,7 +67,7 @@ const QuizPage = () => {
           />
         </div>
         <br />
-        <button
+        <button className = "quiz-button"
           type="submit"
           style={{
             padding: "10px 20px",
