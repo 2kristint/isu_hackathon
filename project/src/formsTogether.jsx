@@ -34,21 +34,21 @@ const formsTogether = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const updatedAppointments = formRefsAppointments.current.map((ref) => ({
-            description: ref.desc,
-            start_time: ref.starttime,
-            end_time: ref.endtime,
+            title: ref.desc,
+            starttime: ref.starttime,
+            endtime: ref.endtime,
         }));
         // setAppointments(updatedAppointments);
 
         const updatedTasks = formRefsTasks.current.map((ref) => ({
             description: ref.desc,
-            duration: ref.duration,
+            length: ref.duration,
             deadline: ref.deadline,
         }));
         // setTasks(updatedTasks);
 
         console.log("Appointments:", JSON.stringify(updatedAppointments, null, 2));
-        console.log("Appointments:", JSON.stringify(updatedTasks, null, 2));
+        console.log("Tasks:", JSON.stringify(updatedTasks, null, 2));
 
         //navigate to scheduler w/ data
         navigate("/scheduler", { state: { appointments: updatedAppointments, tasks: updatedTasks, start: userAnswer1, end: userAnswer2 } });
