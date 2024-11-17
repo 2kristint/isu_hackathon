@@ -2,6 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from '@fullcalendar/interaction';
 import { useLocation } from "react-router-dom";
 import { format } from 'date-fns';
 
@@ -23,9 +24,13 @@ const Scheduler = () => {
     return (
         <>
             <FullCalendar
-                plugins={[timeGridPlugin, dayGridPlugin]}
+                plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
                 initialView="timeGridDay"
                 events={events}
+                editable={true} // Enable drag-and-drop
+                droppable={true} // Allow tasks to be dropped onto the calendar
+                // eventDrop={handleEventDrop} // Handle event drop
+                // eventResize={handleEventResize} // Handle event resize
                 headerToolbar={false}
                 contentHeight='auto'
             />

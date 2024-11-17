@@ -2,8 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import FormsTogether from './formsTogether'
 import Scheduler from './scheduler'
+import Scheduler2 from './scheduler2'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 
 function App() {
 
