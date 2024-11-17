@@ -7,9 +7,14 @@ Make user experience better
 - improve look of input form X
 - incorporate calendar able to edit and shit? X
 
-- make look pretty
-- documentation
+- make look pretty X
+- documentation X
 
+- python script 1
+- python script 2
+- form styles
+- implement 'em
+- make video
 
 npm create vite@latest my-app --template react
 cd my-app

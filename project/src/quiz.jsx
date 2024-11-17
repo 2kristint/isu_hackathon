@@ -31,10 +31,10 @@ const QuizPage = () => {
       <h1 >Little self quiz</h1>
       <h2 className = "subheader">Let's get to know your sleep schedule! 🌿🌙</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: 'flex', flexDirection: 'column', padding:0}}>
-          <h3 className = "quiz-question">Q.1 When do you usually to go to sleep?</h3>
-          <input className = "quiz-input"
-            type="text"
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h3 className="quiz-question">Q.1 When do you usually to go to sleep?</h3>
+          <input className="quiz-input"
+            type="time"
             placeholder="Type your answer"
             value={userAnswer1}
             onChange={(e) => setUserAnswer1(e.target.value)}
@@ -48,9 +48,9 @@ const QuizPage = () => {
               borderRadius: "4px",
             }}
           />
-          <h3 className = "quiz-question">Q.2 When do you usually wake up?</h3>
-          <input className = "quiz-input"
-            type="When do you usually wake up?"
+          <h3 className="quiz-question">Q.2 When do you usually wake up?</h3>
+          <input className="quiz-input"
+            type="time"
             placeholder="Type your answer"
             value={userAnswer2}
             onChange={(e) => setUserAnswer2(e.target.value)}
@@ -67,7 +67,7 @@ const QuizPage = () => {
           />
         </div>
         <br />
-        <button className = "quiz-button"
+        <button className="quiz-button"
           type="submit"
           style={{
             padding: "10px 20px",
