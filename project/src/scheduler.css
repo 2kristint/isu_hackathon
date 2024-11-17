@@ -1,0 +1,10 @@
+.scheduler-backButton:hover{
+    background-color: #3ca832;
+    transform: scale(1.1);
+    box-shadow: 0px 5px 10px rgba(99, 197, 125, 0.2);
+}
+
+.scheduler-backButton{
+    background-color: #25b089;
+}
+
