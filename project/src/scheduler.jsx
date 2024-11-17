@@ -5,50 +5,50 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import { useLocation } from "react-router-dom";
 import { format } from 'date-fns';
-// import { loadPyodide as initPyodide } from "pyodide";
+import { formatData, earliestAppointment, sortAppointments } from './functions.js';
 
 
 const Scheduler = () => {
     const location = useLocation();
     const { appointments = [], tasks = [], start: userAnswer1, end: userAnswer2 } = location.state || {};
-    // const [modifiedValue, setModifiedValue] = useState("");
+    const [appointment, setAppointments] = useState([]);
+    const [task, setTasks] = useState([]);
+    const [sortedAppointments, setSortedAppointments] = useState([]);
 
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
     console.log(formattedDate);
 
+    useEffect(() => {
+        const sampleAppointments = [
+            { title: 'Meeting', start_time: '10:00', end_time: '11:00' },
+            { title: 'Class', start_time: '09:00', end_time: '10:30' },
+        ];
+        const sampleTasks = [
+            { length: 2, description: 'Study', due_date: '2024-11-18' },
+            { length: 1, description: 'Exercise', due_date: '2024-11-18' },
+        ];
 
-    // useEffect(() => {
-    //     async function setupPyodide() {
-    //         try {
-    //             const pyodide = await initPyodide(); // Initialize Pyodide
+        // Format data
+        const { formattedAppointments, formattedTasks } = formatData(sampleAppointments, sampleTasks);
+        setAppointments(formattedAppointments);
+        setTasks(formattedTasks);
 
-    //             // Define the variable to pass
-    //             const initialValue = "Hello";
+        // Find earliest appointment
+        const earliest = earliestAppointment(formattedAppointments);
+        console.log('Earliest Appointment: ', earliest);
 
-    //             // Run Python code to modify the variable
-    //             const result = await pyodide.runPythonAsync(`
-    //             value = "${initialValue}"  # Input variable
-    //             print(f"Original value: {value}")
-    //             value += " meow"  # Append "meow"
-    //             value  # Return the modified value
-    //             `);
+        // Sort appointments
+        const sorted = sortAppointments(sampleAppointments, sampleTasks, sampleAppointments.length);
+        setSortedAppointments(sorted);
 
-    //             console.log("Modified Value from Python:", result); // Log result in console
-    //             setModifiedValue(result); // Update state to display result on the page
-    //         } catch (error) {
-    //             console.error("Error initializing Pyodide or running Python code:", error);
-    //         }
-    //     }
-
-    //     setupPyodide();
-    // }, []);
+    }, []);
 
 
     const events = appointments.map((appointment) => ({
-        title: appointment.desc,
-        start: formattedDate + 'T' + appointment.starttime,
-        end: formattedDate + 'T' + appointment.endtime,
+        title: appointment.description,
+        start: formattedDate + 'T' + appointment.start_time,
+        end: formattedDate + 'T' + appointment.end_time,
     }));
 
     return (
@@ -84,6 +84,8 @@ const Scheduler = () => {
                 ) : (
                     <p>No sleep time were passed from the form.</p>
                 )}
+                <h2>Sorted Appointments:</h2>
+                <pre>{JSON.stringify(sortedAppointments, null, 2)}</pre>
             </div>
         </>
     );
