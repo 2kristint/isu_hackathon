@@ -1,18 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import { useLocation } from "react-router-dom";
 import { format } from 'date-fns';
+import { loadPyodide as initPyodide } from "pyodide";
+
 
 const Scheduler = () => {
     const location = useLocation();
     const { appointments = [], tasks = [], start: userAnswer1, end: userAnswer2 } = location.state || {};
+    const [modifiedValue, setModifiedValue] = useState("");
 
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
     console.log(formattedDate);
+
+
+    useEffect(() => {
+        async function setupPyodide() {
+            try {
+                const pyodide = await initPyodide(); // Initialize Pyodide
+
+                // Define the variable to pass
+                const initialValue = "Hello";
+
+                // Run Python code to modify the variable
+                const result = await pyodide.runPythonAsync(`
+                value = "${initialValue}"  # Input variable
+                print(f"Original value: {value}")
+                value += " meow"  # Append "meow"
+                value  # Return the modified value
+                `);
+
+                console.log("Modified Value from Python:", result); // Log result in console
+                setModifiedValue(result); // Update state to display result on the page
+            } catch (error) {
+                console.error("Error initializing Pyodide or running Python code:", error);
+            }
+        }
+
+        setupPyodide();
+    }, []);
 
 
     const events = appointments.map((appointment) => ({
@@ -54,6 +84,10 @@ const Scheduler = () => {
                 ) : (
                     <p>No sleep time were passed from the form.</p>
                 )}
+                {/* Display modified value */}
+                <p>
+                    Modified Value from Pyodide: <strong>{modifiedValue}</strong>
+                </p>
             </div>
         </>
     );
