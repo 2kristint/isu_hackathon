@@ -21,7 +21,7 @@ const QuizPage = () => {
     setUserAnswer1(""); // Clear the input field
     setUserAnswer2("");
 
-    //navigate to scheduler w/ data
+    //navigate to formsTogether w/ data
     navigate("/form", { state: { start: userAnswer1, end: userAnswer2 } });
   };
 

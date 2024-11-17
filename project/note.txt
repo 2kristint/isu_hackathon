@@ -4,8 +4,11 @@
 
 Make user experience better
 - reformat input to work with scheduler (all times will have the present day date) X
-- improve look of input form
+- improve look of input form X
 - incorporate calendar able to edit and shit? X
+
+- make look pretty
+- documentation
 
 
 npm create vite@latest my-app --template react
