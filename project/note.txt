@@ -7,8 +7,8 @@ Make user experience better
 - improve look of input form X
 - incorporate calendar able to edit and shit? X
 
-- make look pretty
-- documentation
+- make look pretty X
+- documentation X
 
 
 npm create vite@latest my-app --template react
