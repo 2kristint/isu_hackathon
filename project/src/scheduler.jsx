@@ -27,10 +27,8 @@ const Scheduler = () => {
                 plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
                 initialView="timeGridDay"
                 events={events}
-                editable={true} // Enable drag-and-drop
-                droppable={true} // Allow tasks to be dropped onto the calendar
-                // eventDrop={handleEventDrop} // Handle event drop
-                // eventResize={handleEventResize} // Handle event resize
+                editable={true}
+                droppable={true}
                 headerToolbar={false}
                 contentHeight='auto'
             />
@@ -49,12 +47,12 @@ const Scheduler = () => {
                 {userAnswer1.length > 0 ? (
                     <p>Wakeup: {JSON.stringify(userAnswer1)}</p>
                 ) : (
-                    <p>No tasks were passed from the form.</p>
+                    <p>No wakeup time was passed from the form.</p>
                 )}
                 {userAnswer2.length > 0 ? (
                     <p>Sleep: {JSON.stringify(userAnswer2)}</p>
                 ) : (
-                    <p>No tasks were passed from the form.</p>
+                    <p>No sleep time were passed from the form.</p>
                 )}
             </div>
         </>
