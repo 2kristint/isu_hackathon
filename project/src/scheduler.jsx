@@ -6,11 +6,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import { useLocation } from "react-router-dom";
 import { format } from 'date-fns';
-import { useNavigate } from "react-router-dom";
-import "./scheduler.css"
-// import { loadPyodide as initPyodide } from "pyodide";
-import { formatData, earliestAppointment, sortAppointments } from './functions.js';
-
 // import {
 //     formatTasks,
 //     createSchedule
@@ -19,12 +14,6 @@ import { formatData, earliestAppointment, sortAppointments } from './functions.j
 const Scheduler = () => {
     const location = useLocation();
     const { appointments = [], tasks = [], start: userAnswer1, end: userAnswer2 } = location.state || {};
-    // const [modifiedValue, setModifiedValue] = useState("");
-
-    const navigate = useNavigate();
-    const [appointment, setAppointments] = useState([]);
-    const [task, setTasks] = useState([]);
-    const [sortedAppointments, setSortedAppointments] = useState([]);
     const [schedule, setSchedule] = useState([]);
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -82,81 +71,33 @@ const Scheduler = () => {
     }
 
     useEffect(() => {
-        const sampleAppointments = [
-            { title: 'Meeting', start_time: '10:00', end_time: '11:00' },
-            { title: 'Class', start_time: '09:00', end_time: '10:30' },
-        ];
-        const sampleTasks = [
-            { length: 2, description: 'Study', due_date: '2024-11-18' },
-            { length: 1, description: 'Exercise', due_date: '2024-11-18' },
-        ];
+        // Ensure appointments and tasks are correctly formatted
+        console.log(tasks);
+        if (appointments.length > 0 && tasks.length > 0) {
+            const formattedTasksData = formatTasks(tasks, appointments);
+            console.log("formatData" + formattedTasksData);
+            const finalSchedule = [...formattedTasksData, ...appointments];
+            setSchedule(finalSchedule);
+        }
+    }, [appointments, tasks]);
 
-        // Format data
-        const { formattedAppointments, formattedTasks } = formatData(sampleAppointments, sampleTasks);
-        setAppointments(formattedAppointments);
-        setTasks(formattedTasks);
+    useEffect(() => {
+        console.log(schedule)
+        // Map the schedule to events when schedule is updated
+        if (schedule.length > 0) {
+            const formatSchedule = schedule.map((ele) => ({
+                title: ele.title,
+                start: formattedDate + 'T' + ele.starttime,
+                end: formattedDate + 'T' + ele.endtime,
+            }));
+            setEvents(formatSchedule);
+            console.log(events)
+            setLoading(false);
+        }
 
-        // Find earliest appointment
-        const earliest = earliestAppointment(formattedAppointments);
-        console.log('Earliest Appointment: ', earliest);
+    }, [schedule, formattedDate]);
 
-        // Sort appointments
-        const sorted = sortAppointments(sampleAppointments, sampleTasks, sampleAppointments.length);
-        setSortedAppointments(sorted);
-
-    }, []);
-
-
-    const events = appointments.map((appointment) => ({
-        title: appointment.description,
-        start: formattedDate + 'T' + appointment.start_time,
-        end: formattedDate + 'T' + appointment.end_time,
-    }));
-
-    // Handle back button 
-    const handleBack = (e) => {
-
-        //navigate to form page
-        navigate("/form");
-
-    };
-    // Ensure appointments and tasks are correctly formatted
-    console.log(tasks);
-    if (appointments.length > 0 && tasks.length > 0) {
-        const formattedTasksData = formatTasks(tasks, appointments);
-        console.log("formatData" + formattedTasksData);
-        const finalSchedule = [...formattedTasksData, ...appointments];
-        setSchedule(finalSchedule);
-    }
-}, [appointments, tasks]);
-
-useEffect(() => {
-    console.log(schedule)
-    // Map the schedule to events when schedule is updated
-    if (schedule.length > 0) {
-        const formatSchedule = schedule.map((ele) => ({
-            title: ele.title,
-            start: formattedDate + 'T' + ele.starttime,
-            end: formattedDate + 'T' + ele.endtime,
-        }));
-        setEvents(formatSchedule);
-        console.log(events)
-        setLoading(false);
-    }
-
-}, [schedule, formattedDate]);
-
-return (
-    <button onClick={handleBack}>
-        <FullCalendar
-            plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
-            initialView="timeGridDay"
-            events={events}
-            editable={true}
-            droppable={true}
-            headerToolbar={false}
-            contentHeight='auto'
-        />
+    return (
         <>
             {!loading ? (
                 <FullCalendar
@@ -196,11 +137,8 @@ return (
                 <h2>Sorted Appointments:</h2>
                 <pre>{JSON.stringify(schedule, null, 2)}</pre>
             </div>
-            <button type="back" style={{ marginLeft: "0.5rem" }} className="scheduler-backButton">
-                Back
-            </button>
-        </button>
-        );
+        </>
+    );
 };
 
-        export default Scheduler;
+export default Scheduler;
