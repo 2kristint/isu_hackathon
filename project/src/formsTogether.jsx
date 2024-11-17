@@ -97,7 +97,7 @@ const formsTogether = () => {
                 </div>
             ))}
             <button type="button" onClick={addTask}>
-                Add Appointment
+                Add Task
             </button>
             <button type="submit" style={{ marginLeft: "0.5rem" }}>
                 Submit All
