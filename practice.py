@@ -7,7 +7,7 @@
 #     print(formattedAppointments)
 
 from datetime import datetime
-import random
+from random import randint
 
 def formatData(appointments, tasks):
     # Format the appointments data
@@ -79,14 +79,14 @@ def sortAppointments(appointments, tasks, lenAppointments):
 def sortTasks(tasks):
 
     for task in tasks:
-            task['deadline'] = datetime.strptime(task['deadline'], '%Y-%m-%dT%H:%M')
+        task['deadline'] = datetime.strptime(task['deadline'], '%Y-%m-%dT%H:%M')
 
     tasks_sorted = sorted(tasks, key=lambda x: x['deadline'])
+    return tasks_sorted
 
     # for task in tasks_sorted:
     #     print(task)
 
-    return tasks_sorted
 
     # # sort task times from earliest to latest
     # min_idx = 0
@@ -111,11 +111,11 @@ def sortTasks(tasks):
     #     (tasks[s], tasks[min_idx]) = (tasks[min_idx], tasks[s])
 
     # telling python how to interperate the date and time
-    for task in tasks:
-        task['deadline'] = datetime.strptime(task['deadline'], '%Y-%m-%d')
+    # for task in tasks:
+    #     task['deadline'] = datetime.strptime(task['deadline'], '%Y-%m-%d')
 
-    # python sorting function, based on deadline (ascending order)
-    tasks_sorted = sorted(tasks, key=lambda x: x['deadline'])
+    # # python sorting function, based on deadline (ascending order)
+    # tasks_sorted = sorted(tasks, key=lambda x: x['deadline'])
 
 
 def minimizeLateness(size, tasks, appointments):
@@ -125,7 +125,7 @@ def minimizeLateness(size, tasks, appointments):
 
     appIntervals = storeAppIntervals(appointments)
     newArr = []
-    t = 0
+    t = 8
 
     # minimize lateness algorithm (earliest-first) 
     for j in range(size):
@@ -134,24 +134,31 @@ def minimizeLateness(size, tasks, appointments):
         t = t + int(tasks[j]['duration'][:tasks[j]['duration'].find('h')]) + randint(0,3)
 
         # check if task time interval is within an appointment time interval
-        if (set([s,f]).issubset(set(appIntervals))):
+        if ([s,f] in appIntervals):
             pass
         else:
             newArr.append([s,f])
 
     return newArr
 
-def formatTasks(tasks):
+def formatTasks(tasks, appointments):
 
     tasksTemp = tasks
-    tasks = minimizeLateness(len(tasks), tasks)
+    tasks = minimizeLateness(len(tasks), tasks, appointments)
     format = []
     i = 8           # start scheduling at 8am
     for task in tasks:
-        format.append({'description':tasksTemp[i]['description'], 'start_time':task[0], 'end_time':task[1]})
+        format.append({'description':tasksTemp[i]['description'], 'starttime':task[0], 'endtime':task[1]})
         i += 1
     return format
 
+def createSchedule(tasks, appointments):
+
+    schedule = appointments + tasks
+
+    sortedSchedule = sorted(schedule, key=lambda task: task["starttime"])
+
+    return sortedSchedule
 
 def storeAppIntervals(appointments):
 
@@ -179,9 +186,9 @@ formattedAppointments = [{'title':'mentor meeting', 'starttime':'8:00', 'endtime
 # for i in sortedTasks:
 #     print(i)
 
-# print(minimizeLateness(len(formattedTasks), formattedTasks))
+createSchedule(formatTasks(minimizeLateness(len(formattedTasks), formattedTasks, formattedAppointments), formattedAppointments), formattedAppointments)
 
-print(formatTasks(formattedTasks))
+# print(formatTasks(formattedTasks))
 
 # print(sortTasks(formattedTasks))
 
