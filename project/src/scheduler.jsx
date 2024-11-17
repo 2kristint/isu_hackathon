@@ -5,6 +5,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import { useLocation } from "react-router-dom";
 import { format } from 'date-fns';
+import { useNavigate } from "react-router-dom";
+import "./scheduler.css"
 // import { loadPyodide as initPyodide } from "pyodide";
 
 
@@ -12,6 +14,8 @@ const Scheduler = () => {
     const location = useLocation();
     const { appointments = [], tasks = [], start: userAnswer1, end: userAnswer2 } = location.state || {};
     // const [modifiedValue, setModifiedValue] = useState("");
+
+    const navigate = useNavigate();
 
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
@@ -51,8 +55,16 @@ const Scheduler = () => {
         end: formattedDate + 'T' + appointment.endtime,
     }));
 
+    // Handle back button 
+    const handleBack = (e) => {
+
+        //navigate to form page
+        navigate("/form");
+
+    };
+
     return (
-        <>
+        <button onClick = {handleBack}>
             <FullCalendar
                 plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
                 initialView="timeGridDay"
@@ -85,7 +97,10 @@ const Scheduler = () => {
                     <p>No sleep time were passed from the form.</p>
                 )}
             </div>
-        </>
+            <button type="back" style={{ marginLeft: "0.5rem" }} className = "scheduler-backButton">
+                Back
+            </button>
+        </button>
     );
 };
 

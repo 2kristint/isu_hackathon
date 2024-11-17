@@ -55,7 +55,18 @@ const formsTogether = () => {
 
     };
 
+    // Handle back button 
+    const handleBack = (e) => {
+
+        //navigate to quiz page
+        navigate("/");
+
+    };
+
+
+
     return (
+        
         <form onSubmit={handleSubmit}>
             <div className = "background">
             <div className = "appointments-border">
@@ -111,14 +122,20 @@ const formsTogether = () => {
                 
             ))}
             </div>
-            <button type="button" onClick={addTask} className = "task-button">
+            <button  onClick = {handleBack} type="button" 
+            style={{ marginLeft: "0.5rem" }}
+             className = "back-button">
+                Back
+            </button>
+            <button type="button" onClick={addTask} style={{ marginLeft: "1rem" }} className = "task-button">
                 Add Task
             </button>
-            <button type="submit" style={{ marginLeft: "0.5rem" }} className = "forms-submitButton">
+            <button type="submit" style={{ marginLeft: "1rem" }} className = "forms-submitButton">
                 Submit All
             </button>
             </div>
         </form>
+        
         
     );
 
