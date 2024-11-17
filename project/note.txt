@@ -1,0 +1,20 @@
+- grab tasks and appointments X
+- show schedule X
+- route from form page to schedule page X
+
+Make user experience better
+- reformat input to work with scheduler (all times will have the present day date) X
+- improve look of input form X
+- incorporate calendar able to edit and shit? X
+
+- make look pretty X
+- documentation X
+
+
+npm create vite@latest my-app --template react
+cd my-app
+npm install
+npm run dev
+
+created with vite, react
+
