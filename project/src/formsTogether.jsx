@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import "./forms.css";
+
 
 const formsTogether = () => {
 
@@ -55,8 +57,12 @@ const formsTogether = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <div className = "background">
+            <div className = "appointments-border">
             <h2>Appointments</h2>
+           
             {formRefsAppointments.current.map((appointment, index) => (
+
                 <div key={index} style={{ marginBottom: "1rem" }}>
                     <input
                         type="text"
@@ -76,10 +82,12 @@ const formsTogether = () => {
                     />
                 </div>
             ))}
+            </div>
             <button type="button" onClick={addAppointment}>
                 Add Appointment
             </button>
-            <h2>Tasks</h2>
+            <div className = "tasks-border">
+            <h2 >Tasks</h2>
             {formRefsTasks.current.map((task, index) => (
                 <div key={index} style={{ marginBottom: "1rem" }}>
                     <input
@@ -100,14 +108,18 @@ const formsTogether = () => {
                         style={{ marginRight: "0.5rem" }}
                     />
                 </div>
+                
             ))}
+            </div>
             <button type="button" onClick={addTask}>
                 Add Task
             </button>
             <button type="submit" style={{ marginLeft: "0.5rem" }}>
                 Submit All
             </button>
+            </div>
         </form>
+        
     );
 
 }

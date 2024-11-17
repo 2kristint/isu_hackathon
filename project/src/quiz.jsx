@@ -28,10 +28,10 @@ const QuizPage = () => {
 
   return (
     <div className = "quiz-container" style={{ fontFamily: "Arial, sans-serif", textAlign: "center", marginTop: "50px" }}>
-      <h1 className = "quiz-title">Little self quiz</h1>
-      <p>Let's get to know your sleep schedule! 🌿🌙</p>
+      <h1 >Little self quiz</h1>
+      <h2 className = "subheader">Let's get to know your sleep schedule! 🌿🌙</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', padding:0}}>
           <h3 className = "quiz-question">Q.1 When do you usually to go to sleep?</h3>
           <input className = "quiz-input"
             type="text"
@@ -82,7 +82,7 @@ const QuizPage = () => {
           Submit
         </button>
       </form>
-
+        <img className = "image" src = "./AdobeStock_782188559 [Converted].png"></img>
     </div>
   );
 };

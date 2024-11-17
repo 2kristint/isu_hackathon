@@ -2,7 +2,8 @@
 .quiz-container {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+    background: linear-gradient(135deg,  #a1ddb6, #92cd99, #b1f2b8);
+    background-size: 400% 400%; 
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -13,20 +14,31 @@
     box-sizing:border-box;
     align-items: center;
     overflow: hidden;
+    animation: silky-move 8s ease-in-out infinite;
   }
+
   
   /* Title styling with animation */
   .quiz-title {
     font-size: 2.5rem;
-    color: #388e3c;
+    color: #f8f8ff;
     margin-bottom: 20px;
-    animation: fadeIn 2s ease-in-out;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+    animation: bounceIn 1.5s ease-out;
+  }
+
+  .quiz-title {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+    animation: bounceIn 1.5s ease-out;
   }
   
   /* Question styling */
   .quiz-question {
     font-size: 1.5rem;
-    color: #2e7d32;
+    color: #ffffff;
     margin-bottom: 30px;
     animation: bounceIn 1.5s ease-out;
   }
@@ -35,16 +47,17 @@
   .quiz-input {
     padding: 10px 15px;
     font-size: 1.2rem;
-    border: 2px solid #81c784;
+    border: 2px solid #5fd355;
     border-radius: 25px;
     outline: none;
     width: 300px;
     text-align: center;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.8);
   }
   
   .quiz-input:focus {
-    box-shadow: 0 0 15px #a5d6a7;
+    box-shadow: 0 0 15px #a7f3c3;
     transform: scale(1.05);
   }
   
@@ -53,7 +66,7 @@
     margin-top: 20px;
     padding: 10px 25px;
     font-size: 1.2rem;
-    background-color: #66bb6a;
+    background-color: #2f7f27;
     color: white;
     border: none;
     border-radius: 30px;
@@ -62,38 +75,22 @@
   }
   
   .quiz-button:hover {
-    background-color: #43a047;
+    background-color: #3ca832;
     transform: scale(1.1);
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 10px rgba(99, 197, 125, 0.2);
+  }
+
+
+/* Images */
+.image {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    opacity: 0;
+    animation: pop-up 2s ease-in-out infinite;
   }
   
   
-  
-  /* Keyframes for animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes bounceIn {
-    0% {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-    60% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
   
   @keyframes popIn {
     0% {
@@ -101,6 +98,20 @@
     }
     100% {
       transform: scale(1);
+    }
+  }
+
+  
+  /* Silky movement animation */
+@keyframes silky-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 
