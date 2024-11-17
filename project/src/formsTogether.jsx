@@ -122,78 +122,24 @@ const formsTogether = () => {
 
                     ))}
                 </div>
-                <button type="button" onClick={addTask}>
+                <button  onClick = {handleBack} type="button" 
+                    style={{ marginLeft: "0.5rem" }}
+                    className = "back-button">
+                    Back
+                </button>
+                <button type="button" onClick={addTask} style={{ marginLeft: "1rem" }} className = "task-button">
                     Add Task
                 </button>
-                <button type="submit" style={{ marginLeft: "0.5rem" }}>
+                <button type="submit" style={{ marginLeft: "1rem" }} className = "forms-submitButton">
                     Submit All
                 </button>
-                <div key={index} style={{ marginBottom: "1rem" }}>
-                    <input
-                        type="text"
-                        placeholder="Description"
-                        onChange={(e) => (appointment.desc = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                    <input
-                        type="time"
-                        onChange={(e) => (appointment.starttime = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                    <input
-                        type="time"
-                        onChange={(e) => (appointment.endtime = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                </div>
-            ))}
-            </div>
-            <button type="button" onClick={addAppointment} className="forms-addappointment-button">
-                Add Appointment
-            </button>
-            <div className = "tasks-border">
-            <h2 >Tasks</h2>
-            {formRefsTasks.current.map((task, index) => (
-                <div key={index} style={{ marginBottom: "1rem" }}>
-                    <input
-                        type="text"
-                        placeholder="Description"
-                        onChange={(e) => (task.desc = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Duration (e.g., 2h 30m)"
-                        onChange={(e) => (task.duration = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                    <input
-                        type="datetime-local"
-                        onChange={(e) => (task.deadline = e.target.value)}
-                        style={{ marginRight: "0.5rem" }}
-                    />
-                </div>
-                
-            ))}
-            </div>
-            <button  onClick = {handleBack} type="button" 
-            style={{ marginLeft: "0.5rem" }}
-             className = "back-button">
-                Back
-            </button>
-            <button type="button" onClick={addTask} style={{ marginLeft: "1rem" }} className = "task-button">
-                Add Task
-            </button>
-            <button type="submit" style={{ marginLeft: "1rem" }} className = "forms-submitButton">
-                Submit All
-            </button>
-            </div>
+            </div>    
+            
         </form>
 
         
         
     );
-
-}
+};
 
 export default formsTogether;
