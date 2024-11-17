@@ -131,7 +131,7 @@ def minimizeLateness(size, tasks, appointments):
     for j in range(size):
         s = t
         f = t + int(tasks[j]['duration'][:tasks[j]['duration'].find('h')])
-        t = t + int(tasks[j]['duration'][:tasks[j]['duration'].find('h')]) + randint(0,3)
+        t = t + int(tasks[j]['duration'][:tasks[j]['duration'].find('h')])
 
         # check if task time interval is within an appointment time interval
         if ([s,f] in appIntervals):
@@ -146,19 +146,21 @@ def formatTasks(tasks, appointments):
     tasksTemp = tasks
     tasks = minimizeLateness(len(tasks), tasks, appointments)
     format = []
-    i = 8           # start scheduling at 8am
+    i = 0           # start scheduling at 8am
     for task in tasks:
-        format.append({'description':tasksTemp[i]['description'], 'starttime':task[0], 'endtime':task[1]})
+        format.append({'description':tasksTemp[i]['description'], 'starttime':str(task[0])+':00', 'endtime':str(task[1])+':00'})
         i += 1
     return format
 
 def createSchedule(tasks, appointments):
 
-    schedule = appointments + tasks
+    for task in tasks:
+        appointments.append(task)
 
-    sortedSchedule = sorted(schedule, key=lambda task: task["starttime"])
+    schedule = appointments
 
-    return sortedSchedule
+    return schedule
+
 
 def storeAppIntervals(appointments):
 
@@ -186,7 +188,7 @@ formattedAppointments = [{'title':'mentor meeting', 'starttime':'8:00', 'endtime
 # for i in sortedTasks:
 #     print(i)
 
-createSchedule(formatTasks(minimizeLateness(len(formattedTasks), formattedTasks, formattedAppointments), formattedAppointments), formattedAppointments)
+print(createSchedule(formatTasks(formattedTasks, formattedAppointments), formattedAppointments))
 
 # print(formatTasks(formattedTasks))
 
