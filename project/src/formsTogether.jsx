@@ -1,6 +1,10 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formsTogether = () => {
+    const [userInput, setUserInput] = useState("");
+    const navigate = useNavigate();
+
     const [appointments, setAppointments] = useState([]);
     const formRefsAppointments = useRef([{ desc: "", starttime: "", endtime: "" }]);
 
@@ -27,15 +31,21 @@ const formsTogether = () => {
             starttime: ref.starttime,
             endtime: ref.endtime,
         }));
-        setAppointments(updatedAppointments);
-        console.log("Appointments:", JSON.stringify(updatedAppointments, null, 2));
+        // setAppointments(updatedAppointments);
+
         const updatedTasks = formRefsTasks.current.map((ref) => ({
             desc: ref.desc,
             duration: ref.duration,
             deadline: ref.deadline,
         }));
-        setAppointments(updatedTasks);
+        // setTasks(updatedTasks);
+
+        console.log("Appointments:", JSON.stringify(updatedAppointments, null, 2));
         console.log("Appointments:", JSON.stringify(updatedTasks, null, 2));
+
+        //navigate to scheduler w/ data
+        navigate("/scheduler", { state: { appointments: updatedAppointments, tasks: updatedTasks } });
+
     };
 
     return (
