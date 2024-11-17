@@ -25,6 +25,7 @@ This application helps the user schedule their day by learning the user's prefer
 
 - [React (JavaScript Vite)](https://vitejs.dev/)
 - [NodeJS](https://nodejs.org/en)
+- [FullCalendar](https://fullcalendar.io/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -37,7 +38,6 @@ Install all the required packages in the `project` directory
 ```
 cd project
 npm install
-
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -48,7 +48,6 @@ To run the project locally
 
 ```
 npm run dev
-
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
