@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const formsTogether = () => {
+
+    const location = useLocation();
+    const { start: userAnswer1, end: userAnswer2 } = location.state || {};
+
     const [userInput, setUserInput] = useState("");
     const navigate = useNavigate();
 
@@ -44,7 +49,7 @@ const formsTogether = () => {
         console.log("Appointments:", JSON.stringify(updatedTasks, null, 2));
 
         //navigate to scheduler w/ data
-        navigate("/scheduler", { state: { appointments: updatedAppointments, tasks: updatedTasks } });
+        navigate("/scheduler", { state: { appointments: updatedAppointments, tasks: updatedTasks, start: userAnswer1, end: userAnswer2 } });
 
     };
 

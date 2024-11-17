@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 
 const Scheduler = () => {
     const location = useLocation();
-    const { appointments = [], tasks = [] } = location.state || {};
+    const { appointments = [], tasks = [], start: userAnswer1, end: userAnswer2 } = location.state || {};
 
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'yyyy-MM-dd');
@@ -43,6 +43,16 @@ const Scheduler = () => {
                 )}
                 {tasks.length > 0 ? (
                     <p>Tasks passed: {JSON.stringify(tasks)}</p>
+                ) : (
+                    <p>No tasks were passed from the form.</p>
+                )}
+                {userAnswer1.length > 0 ? (
+                    <p>Wakeup: {JSON.stringify(userAnswer1)}</p>
+                ) : (
+                    <p>No tasks were passed from the form.</p>
+                )}
+                {userAnswer2.length > 0 ? (
+                    <p>Sleep: {JSON.stringify(userAnswer2)}</p>
                 ) : (
                     <p>No tasks were passed from the form.</p>
                 )}
